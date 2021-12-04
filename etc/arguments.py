@@ -36,11 +36,14 @@ def parse_options(arguments=None):
     opts, args = parser.parse_args(arguments)
 
     # Arg parse method
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-a", "--auto", action="store", type=int, nargs="+", help="Auto-generate clips L C H T")
-    parser.add_argument("-f", "--format", choices=["mp4", "gif", "webm"],  help="Specify output file format", default="mp4")
-    parser.add_argument("-v", "--verbose", action="store_true")
-    parser.add_argument("-c", "--clips", action="store")
+    parser = argparse.ArgumentParser(prog="rapid", description="Media clipping tool")
+    parser.add_argument("-a", "--auto", action="store", type=int, nargs="+", help="total number of clips, clip length")
+    parser.add_argument("-f", "--format", choices=["mp4", "gif", "webm"],  help="output file format", default="mp4")
+    parser.add_argument("-v", "--verbose", action="store_true", helps="gives lots of detail")
+    parser.add_argument("-c", "--clips", action="store", help="custom timestamps")
+    parser.add_argument("-b", "--batch", action="store", help="File containg filenames to clip")
+    parser.add_argument("-t", "--trim", action="store", type=int, nargs="+", help="the start and end boundaries in seconds")
 
+    args = parser.parse_args(arguments)
 
-    return opts
+    return args
